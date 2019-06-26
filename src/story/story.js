@@ -23,7 +23,7 @@ class Story {
         'id': 2,
         'message': 'Ping {{USERNAME}}',
         'moveTo': 3,
-      },
+      },
       {
         'id': 3,
         'message': 'Packet sent',
