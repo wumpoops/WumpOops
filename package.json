@@ -1,0 +1,24 @@
+{
+  "name": "WumpOops",
+  "version": "1.0.0",
+  "description": "Discord Hack Week Bot",
+  "main": "src/index.js",
+  "repository": "git@github.com:wumpoops/WumpOops.git",
+  "author": "JaniDJ <BlogerBoy98@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node_modules/.bin/babel src --out-dir lib && node lib/index.js"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "core-js": "3",
+    "discord.js": "^11.5.1",
+    "mongodb": "^3.2.7"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-arrow-functions": "^7.2.0",
+    "@babel/preset-env": "^7.4.5"
+  }
+}
