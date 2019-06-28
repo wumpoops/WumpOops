@@ -5,6 +5,13 @@ class Story {
   constructor() {
     this.story = [
       {
+        'id': -4,
+        'type': 'rich',
+        'title': 'Work in Progress',
+        'moveTo': -3,
+        'message': 'Unfortunately this part of the game is still under development. We hope to provide you with new content soon.',
+      },
+      {
         'id': -3,
         'type': 'rich',
         'title': 'Thanks for playing',
@@ -34,6 +41,7 @@ class Story {
       },
       {
         'id': 1.1,
+        'type': 'system',
         'message': 'Testing connection...',
         'minWaiting': 1000,
         'maxWaiting': 3000,
@@ -41,6 +49,7 @@ class Story {
       },
       {
         'id': 2,
+        'type': 'system',
         'message': 'Ping {{USERNAME}}',
         'moveTo': 3,
         'minWaiting': 1000,
@@ -48,6 +57,7 @@ class Story {
       },
       {
         'id': 3,
+        'type': 'system',
         'message': 'Packet sent',
         'choices': [
           {
@@ -62,6 +72,7 @@ class Story {
       },
       {
         'id': 4,
+        'type': 'system',
         'message': 'Packet recieved in {{SECONDS}} ms. Connection established.',
         'moveTo': 5,
         'minWaiting': 1000,
@@ -521,8 +532,8 @@ class Story {
         'message': 'That was the first chapter. WumpOops now processes the new information and tries to get to the next sub grid. That wouldn\'t be possible without your help. As soon as he has made it he will contact you again. So stay alert. You never know what\'s out there.',
         'type': 'rich',
         'moveTo': 31,
-        'minWaiting': 5000,
-        'maxWaiting': 10000,
+        'minWaiting': 600000,
+        'maxWaiting': 650000,
       },
 
       // Chapter 2
@@ -639,7 +650,7 @@ class Story {
         'minWaiting': 1000,
         'maxWaiting': 3000,
         'type': 'game',
-        'onFail': 44,
+        'onFail': 45,
         'choices': [
           {
             'id': 32,
@@ -680,31 +691,50 @@ class Story {
         'message': 'Really? Okay then. But still...',
         'minWaiting': 1000,
         'maxWaiting': 3000,
+        'moveTo': 44,
       },
       {
         'id': 41,
         'message': 'That\'s me.',
         'minWaiting': 1000,
         'maxWaiting': 3000,
+        'moveTo': 44,
       },
       {
         'id': 42,
         'message': 'For you I have any second. Time isn\'t really moving for me anyways. I only need time to process your answer.',
         'minWaiting': 1000,
         'maxWaiting': 3000,
+        'moveTo': 44,
       },
       {
         'id': 43,
         'message': 'Do it. Just. Do it.',
         'minWaiting': 1000,
         'maxWaiting': 3000,
+        'moveTo': 44,
       },
       {
         'id': 44,
-        'message': 'Do it. Just. Do it.',
+        'message': 'Since that worked, we can move on! I can track your game activity at any given moment and everything! Thats soooo helpful',
         'minWaiting': 1000,
         'maxWaiting': 3000,
-        'moveTo': -1,
+        'moveTo': -4,
+      },
+      {
+        'id': 45,
+        'type': 'system',
+        'message': 'Waiting for game to start ...',
+        'minWaiting': 10000,
+        'maxWaiting': 9000,
+        'moveTo': 46,
+      },
+      {
+        'id': 46,
+        'message': 'Do you don\'t have any games? Shame on you.',
+        'minWaiting': 30000,
+        'maxWaiting': 35000,
+        'moveTo': -4,
       },
     ];
   }

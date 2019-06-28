@@ -27,7 +27,7 @@ class Loop {
           }
           this.save();
         }
-        await this.sleep(1000);
+        await this.sleep(500);
       }
 
     })();
@@ -58,6 +58,13 @@ class Loop {
       if(story.type == 'game') {
         if(user.presence.game) {
           game = user.presence.game.name;
+        } else {
+          this.addToQueue({
+            timeToSend: Date.now(),
+            toSend: story.onFail,
+            userId: userId,
+          });
+          return;
         }
       }
 
@@ -84,6 +91,8 @@ class Loop {
 
       if(story.type == 'rich') {
         m = new RichEmbed().setTitle(story.title || 'Game').setColor('#e36212').setDescription(m);
+      } else if (story.type == 'system') {
+        m = new RichEmbed().setColor('#204060').setDescription(m);
       }
 
       user.send(m).then(async sent => {
