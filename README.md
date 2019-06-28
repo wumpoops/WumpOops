@@ -7,9 +7,12 @@
 <hr />
 
 # WumpOops
-This is WumpOops a Discord adventure BOT🤖 for Discord Hack Week 2019.
+This is WumpOops a time-traveling bot. He was first seen at Discord Hack Week 2019 roaming the servers looking for people to join him.
 
 WumpOops is a sophisticated artificial intelegence sent with some other bots from the future. The bots are looking for knowledge and help. In the future the internet as we know no longer exists. Therefore the Bots were sent to collect information about what happened to prevent the terrible misfortune. But WumpOops and his friends can't do it alone. He needs you and everyone you can track down for him. To help him, you must listen to him and help him. The more players support WumpOops, the more computing power he will get. With your help, he will rise step by step in the sub grids. Will WumpOops save the world? Go and help him!
+
+## What will happen after the Hack Week
+We have big plans with WumpOops and his friends. Even after Hack Week, we have plans to develop our little friends further and send them on new adventures. You can accompany him by visiting the official [Discord](https://discord.gg/wXpPBDW).
 
 ## How to play
 There are two ways to start the game. Either you invite WumpOops on your server and write `!play` into any channel or you write a pm with `!play`.
@@ -19,8 +22,7 @@ WumpOops will answer you immediately and give you your first tasks. To answer hi
 ## Who are we?
 We're three guys from Germany. We've already mastered several projects together. When we saw the announcement for the Discord Hack Week it was clear that we had to participate. Our story writer Outburst#0001 ([twitter](https://twitter.com/Outburst3000)) already had a clear idea of the story. It only took 10 minutes since he gave me his first ideas. spilox#3133 ([twitter](https://twitter.com/spilox)) is our designer. He is responsible for all pictures and graphics you can see. Without him this would be quite dull. And I am the developer. My name is Jan-Niklas aka JaniDJ ([twitter](https://twitter.com/DerJ4ni)) and I'm responsible for the bot and the whole logic behind it. I hope you like our work and maybe there will be more if enough people are interested in it.
 
-# Code
-## Usage
+# Usage
 
 To use this code, you have to clone it first.
 
