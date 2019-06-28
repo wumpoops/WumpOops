@@ -42,3 +42,7 @@ WUMPOOPS_TOKEN=<YOUR_TOKEN_GOES_HERE> yarn start
 ```
 
 Now you can use the bot yourself. You need to specify the `WUMPOOPS_TOKEN` to use it. Please report any Issues here or on the official [Discord](https://discord.gg/wXpPBDW)
+
+
+## Sources
+- Font: 3Dventure by [memesbruh03](https://memesbruh03.co/)
