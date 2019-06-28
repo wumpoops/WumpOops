@@ -15,9 +15,11 @@ WumpOops is a sophisticated artificial intelegence sent with some other bots fro
 We have big plans with WumpOops and his friends. Even after Hack Week, we have plans to develop our little friends further and send them on new adventures. You can accompany him by visiting the official [Discord](https://discord.gg/wXpPBDW).
 
 ## How to play
-There are two ways to start the game. Either you invite WumpOops on your server and write `!play` into any channel or you write a pm with `!play`.
+There are two ways to start the game. Either you [invite WumpOops](https://discordapp.com/oauth2/authorize?client_id=592769923340566528&scope=bot&permissions=85056) on your server and write `!play` into any channel or you write a pm with `!play`.
 
 WumpOops will answer you immediately and give you your first tasks. To answer him you can simply use the reactions given to you. WumpOops will only respond to the given reactions. But don't be surprised as long as WumpOops is still stuck on the lowest sub grid it might take some time until he responds.
+
+You can use `!reset` at any time to start from the begining. Feel free to use it when ever you need. 
 
 ## Who are we?
 We're three guys from Germany. We've already mastered several projects together. When we saw the announcement for the Discord Hack Week it was clear that we had to participate. Our story writer Outburst#0001 ([twitter](https://twitter.com/Outburst3000)) already had a clear idea of the story. It only took 10 minutes since he gave me his first ideas. spilox#3133 ([twitter](https://twitter.com/spilox)) is our designer. He is responsible for all pictures and graphics you can see. Without him this would be quite dull. And I am the developer. My name is Jan-Niklas aka JaniDJ ([twitter](https://twitter.com/DerJ4ni)) and I'm responsible for the bot and the whole logic behind it. I hope you like our work and maybe there will be more if enough people are interested in it.
