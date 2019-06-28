@@ -21,7 +21,7 @@ class Loop {
           const ele = this.queue.shift();
           // if check timestamp exceeded execute : push again
           if(ele.timeToSend < Date.now()) {
-            this.sendStory(ele.toSend, ele.userId);
+            this.sendStory(ele.toSend, ele.userId, ele.data);
           } else {
             this.addToQueue(ele);
           }
@@ -49,10 +49,18 @@ class Loop {
     this.isActive = active;
   }
 
-  sendStory(storyId, userId) {
+  sendStory(storyId, userId, data) {
     this.client.fetchUser(userId).then(user => {
       const player = DB.getPlayer(userId);
       const story = Story.getMessage(storyId);
+
+      let game = 'Nothing';
+      if(story.type == 'game') {
+        if(user.presence.game) {
+          game = user.presence.game.name;
+        }
+      }
+
       let m = story.message;
       if(story.choices) {
         m += '\n\n';
@@ -62,6 +70,12 @@ class Loop {
       }
 
       m = m.replace(/{{USERNAME}}/gmi, user.username);
+      if(data) {
+        m = m.replace(/{{RUNNING_GAME}}/gmi, data.game);
+      }
+      if(story.type == 'game') {
+        m = m.replace(/{{RUNNING_GAME}}/gmi, game);
+      }
       if(player) {
         m = m.replace(/{{SECONDS}}/gmi, Date.now() - player.lastSend);
       }
