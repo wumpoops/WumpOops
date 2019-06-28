@@ -50,3 +50,8 @@ Now you can use the bot yourself. You need to specify the `WUMPOOPS_TOKEN` to us
 
 ## Sources
 - Font: 3Dventure by [memesbruh03](https://memesbruh03.co/)
+
+
+
+
+* Be aware that the name WumpOops is case sensitive! 
