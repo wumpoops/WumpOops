@@ -2,7 +2,7 @@
 
 <hr />
 <p align="center" >
-<img src="https://discordapp.com/api/guilds/592079063695491122/widget.png">
+<a href="https://discord.gg/wXpPBDW"><img src="https://discordapp.com/api/guilds/592079063695491122/widget.png"></a>
 <p/>
 <hr />
 
@@ -17,7 +17,7 @@ There are two ways to start the game. Either you invite WumpOops on your server 
 WumpOops will answer you immediately and give you your first tasks. To answer him you can simply use the reactions given to you. WumpOops will only respond to the given reactions. But don't be surprised as long as WumpOops is still stuck on the lowest sub grid it might take some time until he responds.
 
 ## Who are we?
-We're three guys from Germany. We've already mastered several projects together. When we saw the announcement for the Discord Hack Week it was clear that we had to participate. Our story writer Outburst#0001 ([twitter](https://twitter.com/Outburst3000)) already had a clear idea of the story. It only took 10 minutes since he gave me his first ideas. spilox#3133 ([twitter](https://twitter.com/spilox)) is our designer. He is responsible for all pictures and graphics you can see. Without him this would be quite dull. And I am the developer. I'm responsible for the bot and the whole logic behind it. I hope you like our work and maybe there will be more if enough people are interested in it.
+We're three guys from Germany. We've already mastered several projects together. When we saw the announcement for the Discord Hack Week it was clear that we had to participate. Our story writer Outburst#0001 ([twitter](https://twitter.com/Outburst3000)) already had a clear idea of the story. It only took 10 minutes since he gave me his first ideas. spilox#3133 ([twitter](https://twitter.com/spilox)) is our designer. He is responsible for all pictures and graphics you can see. Without him this would be quite dull. And I am the developer. My name is Jan-Niklas aka JaniDJ ([twitter](https://twitter.com/DerJ4ni)) and I'm responsible for the bot and the whole logic behind it. I hope you like our work and maybe there will be more if enough people are interested in it.
 
 # Code
 ## Usage
