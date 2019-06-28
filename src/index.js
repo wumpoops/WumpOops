@@ -2,13 +2,12 @@ import { Client, RichEmbed } from 'discord.js';
 import { log, error, debug } from './logger/logger';
 import emoji from './util/emoji';
 import Story from './story/story';
-import LOOP from './loop/loop';
+import Loop from './loop/loop';
 import DB from './database/database';
 
 import fs from 'fs';
 const client = new Client();
-
-// const users = [];
+const LOOP = new Loop(client);
 
 client.on('ready', () => {
   log(`Logged in as ${client.user.tag}!`);
@@ -19,6 +18,7 @@ client.on('ready', () => {
     },
     status: 'online',
   });
+  LOOP.setActive(true);
 });
 
 // TODO
@@ -42,8 +42,6 @@ client.on('message', msg => {
       timeToSend: Date.now(),
       toSend: 1,
       userId: msg.author.id,
-      user: user,
-      player: false,
     })).catch(error);
 
   } else if (msg.channel.type == 'dm' && msg.content.toLowerCase() === '!RESET'.toLowerCase()) {
@@ -55,8 +53,6 @@ client.on('message', msg => {
       timeToSend: Date.now(),
       toSend: 1,
       userId: msg.author.id,
-      user: user,
-      player: false,
     })).catch(error);
   }
 });
@@ -78,16 +74,10 @@ client.on('raw', event => {
           if(oldStory.choices) {
             for(const j in oldStory.choices) {
               if(oldStory.choices[j].emoji == event.d.emoji.name) {
-                DB.updatePlayer(event.d.user_id,
-                  {
-                    reacted: true,
-                  });
                 LOOP.addToQueue({
-                  timeToSend: Date.now() + LOOP.randomTimeInterval(),
+                  timeToSend: Date.now() + LOOP.randomTimeInterval(oldStory.choices[j].minWaiting, oldStory.choices[j].maxWaiting),
                   toSend: oldStory.choices[j].moveTo,
                   userId: event.d.user_id,
-                  user: user,
-                  player: player,
                 });
                 return;
               }
@@ -104,19 +94,9 @@ client.on('error', msg => {
   error(msg);
 });
 
-client.on('debug', msg => {
-  // debug(msg);
-});
-
 client.on('guildMemberAdd', member => {
   member.send(`Hey ${member}, wanne play a game?`);
 });
-
-/* client.on('messageReactionAdd', msg => {
-  log(msg);
-  // msg.user.send(`U have reacted with ${msg.messageReaction}, wanne play a game?`);
-});*/
-
 
 const getDefaultChannel = (guild) => {
   // get "original" default channel

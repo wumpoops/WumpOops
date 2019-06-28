@@ -19,6 +19,10 @@ class Database {
   }
 
   updatePlayer(id, data) {
+    if(this.players[id]) {
+      const oldData = this.players[id];
+      data = Object.assign(oldData, data);
+    }
     this.players[id] = data;
     this.save();
   }

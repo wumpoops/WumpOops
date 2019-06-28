@@ -1,84 +1,123 @@
 import Story from '../story/story';
+import { RichEmbed } from 'discord.js';
 import DB from '../database/database';
 import { log, error, debug } from '../logger/logger';
+import fs from 'fs';
 
 class Loop {
-  constructor() {
-    this.queue = [];
+  constructor(client) {
+    this.client = client;
+
+    const raw = fs.readFileSync('queue.json');
+    this.queue = raw ? JSON.parse(raw) : [] ;
+
     this.getLoopRunning();
   }
 
   getLoopRunning() {
     (async () => {
       while(true) {
-        if(this.queue.length > 0) {
+        if(this.isActive && this.queue.length > 0) {
           const ele = this.queue.shift();
           // if check timestamp exceeded execute : push again
           if(ele.timeToSend < Date.now()) {
-            this.sendStory(ele.toSend, ele.userId, ele.player, ele.user);
+            this.sendStory(ele.toSend, ele.userId);
           } else {
             this.addToQueue(ele);
           }
+          this.save();
         }
-        await this.Sleep(1000);
+        await this.sleep(1000);
       }
 
     })();
   }
+  save() {
+    fs.writeFileSync('queue.json', JSON.stringify(this.queue));
+  }
 
-  Sleep(milliseconds) {
+  sleep(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
   }
 
   addToQueue(element) {
     this.queue.push(element);
+    this.save();
   }
 
-  sendStory(storyId, userId, player, user) {
-    const story = Story.getMessage(storyId);
-    let m = story.message;
-    if(story.choices) {
-      m += '\n\n';
-      for(const i in story.choices) {
-        m += story.choices[i].emoji + ' ' + story.choices[i].message + '\n\n';
-      }
-    }
+  setActive(active) {
+    this.isActive = active;
+  }
 
-    m = m.replace(/{{USERNAME}}/gmi, user.username);
-    if(player) {
-      m = m.replace(/{{SECONDS}}/gmi, Date.now() - player.lastSend);
-    }
-    m = m.replace(/{{CURRENT_USERS}}/gmi, DB.getPlayerCount());
-    m = m.replace(/{{YEAR}}/gmi, 2019);
-    user.send(m).then(async sent => {
-      DB.updatePlayer(userId,
-        {
-          lastMsg: sent.id,
-          lastGameMsg: story.id,
-          lastSend: Date.now(),
-          reacted: false,
-        });
+  sendStory(storyId, userId) {
+    this.client.fetchUser(userId).then(user => {
+      const player = DB.getPlayer(userId);
+      const story = Story.getMessage(storyId);
+      let m = story.message;
       if(story.choices) {
+        m += '\n\n';
         for(const i in story.choices) {
-          await sent.react(story.choices[i].emoji).catch(error);
+          m += story.choices[i].emoji + ' ' + story.choices[i].message + '\n\n';
         }
       }
-      if(story.moveTo) {
-        // sendStory(story.moveTo, userId, player || DB.getPlayer(userId), user, msg);
-        this.addToQueue({
-          timeToSend: Date.now() + this.randomTimeInterval(),
-          toSend: story.moveTo,
-          userId: userId,
-          user: user,
-          player: player || DB.getPlayer(userId),
-        });
+
+      m = m.replace(/{{USERNAME}}/gmi, user.username);
+      if(player) {
+        m = m.replace(/{{SECONDS}}/gmi, Date.now() - player.lastSend);
       }
-    }).catch(error);
+      m = m.replace(/{{CURRENT_USERS}}/gmi, DB.getPlayerCount());
+      m = m.replace(/{{YEAR}}/gmi, 2019);
+
+      if(story.type == 'rich') {
+        m = new RichEmbed().setTitle(story.title || 'Game').setColor('#e36212').setDescription(m);
+      }
+
+      user.send(m).then(async sent => {
+        DB.updatePlayer(userId,
+          {
+            lastMsg: sent.id,
+            lastGameMsg: story.id,
+            lastSend: Date.now(),
+            reacted: false,
+            // alreadyUsed: [],
+          });
+        if(story.choices) {
+          for(const i in story.choices) {
+            await sent.react(story.choices[i].emoji).catch(error);
+          }
+        }
+        if(story.moveTo) {
+          // sendStory(story.moveTo, userId, player || DB.getPlayer(userId), user, msg);
+          this.addToQueue({
+            timeToSend: Date.now() + this.randomTimeInterval(story.minWaiting, story.maxWaiting),
+            toSend: story.moveTo,
+            userId: userId,
+          });
+        }
+      }).catch(err => {
+        error(err);
+        this.addToQueue({
+          timeToSend: Date.now(),
+          toSend: storyId,
+          userId: userId,
+        });
+      });
+    }).catch(err => {
+      error(err);
+      this.addToQueue({
+        timeToSend: Date.now(),
+        toSend: storyId,
+        userId: userId,
+      });
+    });
   }
 
   randomTimeInterval(min = 2000, max = 6000) {
+    if(min == 0 && max == 0) {
+      return 0;
+    }
     return Math.floor(Math.random() * Math.floor(max - min)) + min;
   }
 }
 
-export default new Loop();
+export default Loop;
