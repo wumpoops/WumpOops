@@ -53,5 +53,6 @@ Now you can use the bot yourself. You need to specify the `WUMPOOPS_TOKEN` to us
 
 
 
-
+<br />
+<br />
 * Be aware that the name WumpOops is case sensitive! 
